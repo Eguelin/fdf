@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/20 13:30:21 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/20 13:58:43 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 
 #Sources
 PARS_DIR = parsing/
-FILES_PARS = import_map mainmyli
+FILES_PARS = import_map main
 FILES_ALL = $(addprefix $(PARS_DIR), $(FILES_PARS))
 
 OBJS		= $(addprefix $(OUT_DIR), $(addsuffix .o, $(FILES_ALL)))
