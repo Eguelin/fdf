@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/16 17:20:23 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/20 13:30:21 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,9 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 
 #Sources
 PARS_DIR = parsing/
-FILES_PARS = import_map main
+FILES_PARS = import_map mainmyli
 FILES_ALL = $(addprefix $(PARS_DIR), $(FILES_PARS))
 
-LIB_DIR = lib/
-FILES_LIB = lib
-LIB_ALL = $(addprefix $(LIB_DIR), $(FILES_LIB))
-
-INC_FILES	= fdf
-
-LIB		= $(addsuffix .a, $(LIB_ALL))
 OBJS		= $(addprefix $(OUT_DIR), $(addsuffix .o, $(FILES_ALL)))
 HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 
@@ -54,9 +47,9 @@ HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 .PHONY: all
 all: $(NAME)
 
-$(NAME): lib $(OUT_DIR) $(OBJS)
+$(NAME): $(OUT_DIR) $(OBJS) mylib
 	@norminette | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) lib/mylib/mylib.a -o $(NAME)
 	@echo $(COMP_MSG)
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
@@ -64,25 +57,22 @@ $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
 
 .PHONY: clean
 clean:
-	@make clean -C ./lib
+	@make clean -C ./lib/mylib
 	@$(RM) $(OUT_DIR)
 	@echo $(CLEAN_MSG)
 
 .PHONY: fclean
 fclean:
-	@make fclean -C ./lib
+	@make fclean -C ./lib/mylib
 	@$(RM) $(NAME) $(OUT_DIR)
 	@echo $(FULL_CLEAN_MSG)
 
 .PHONY: re
 re: fclean all
 
-.PHONY: force
-force:
-
-.PHONY: lib
-lib: force
-	@make -C ./lib
+.PHONY: mylib
+mylib:
+	@make -C ./lib/mylib
 
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
