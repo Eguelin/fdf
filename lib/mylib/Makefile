@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/16 17:20:54 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/20 13:16:50 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 OUT_DIR	= build/
 SRC_DIR	= src/
 INC_DIR	= include/
-NAME	= lib.a
+NAME	= mylib.a
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR)
 RM		= rm -rf
@@ -97,7 +97,7 @@ clean:
 	@echo $(CLEAN_MSG)
 
 .PHONY: fclean
-fclean: 
+fclean:
 	@$(RM) $(NAME) $(OUT_DIR)
 	@echo $(FULL_CLEAN_MSG)
 
