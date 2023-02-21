@@ -6,20 +6,20 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 17:01:05 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 17:05:02 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_import_coord(int *i, int y, t_data *data);
+int	ft_import_coord(int fd, int y, t_data *data);
 
 int	ft_import_map(const char *path, t_data *data)
 {
-	int	i;
+	int	fd;
 	int	y;
 
-	i = 0;
+	fd = 0;
 	y = 1;
 	ft_size_file(path, data);
 	data->map = malloc(sizeof(t_coord) * data->x * data->y);
@@ -27,7 +27,7 @@ int	ft_import_map(const char *path, t_data *data)
 		return (-1);
 	while (y <= data->y)
 	{
-		ft_import_coord(&i, y, data);
+		ft_import_coord(fd, y, data);
 		y++;
 	}
 	return (0);
@@ -60,18 +60,21 @@ void	ft_size_file(const char *path, t_data *data)
 	close(fd);
 }
 
-int	ft_import_coord(int *i, int y, t_data *data)
+int	ft_import_coord(int fd, int y, t_data *data)
 {
+	int	i;
 	int	x;
-	char	**line;
+	//char	**line;
 
 	x = 1;
+	i = fd;
+	i = (y - 1) * data->x;
 	while (x <= data->x)
 	{
-		data->map[*i].x = x++;
-		data->map[*i].y = y;
-		data->map[*i].z = 0;
-		(*i)++;
+		data->map[i].x = x++;
+		data->map[i].y = y;
+		data->map[i].z = 0;
+		i++;
 	}
 	return (0);
 }
