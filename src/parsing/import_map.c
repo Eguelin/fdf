@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 17:10:45 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 17:33:45 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@ int	ft_import_map(const char *path, t_data *data)
 	int	fd;
 	int	y;
 
-	fd = 0;
 	y = 1;
 	ft_size_file(path, data);
 	data->map = malloc(sizeof(t_coord) * data->x * data->y);
 	if (!(data->map))
 		return (-1);
+	fd = open(path, O_RDONLY);
 	while (y <= data->y)
 	{
-		ft_import_coord(fd, y, data);
+		if (ft_import_coord(fd, y, data))
+		{
+			return (-1);
+			close(fd);
+		}
 		y++;
 	}
+	close(fd);
 	return (0);
 }
 
@@ -62,12 +67,14 @@ void	ft_size_file(const char *path, t_data *data)
 
 int	ft_import_coord(int fd, int y, t_data *data)
 {
-	int	i;
-	int	x;
+	int		i;
+	int		x;
 	char	**line;
 
+	line = ft_split(get_next_line(fd), ' ');
+	if (!line[0])
+		return (-1);
 	x = 1;
-	i = fd;
 	i = (y - 1) * data->x;
 	while (x <= data->x)
 	{
@@ -76,5 +83,6 @@ int	ft_import_coord(int fd, int y, t_data *data)
 		data->map[i].z = 0;
 		i++;
 	}
+	ft_free_split(line);
 	return (0);
 }
