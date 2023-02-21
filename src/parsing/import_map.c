@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 17:33:45 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 17:48:58 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,22 @@ int	ft_import_coord(int fd, int y, t_data *data)
 {
 	int		i;
 	int		x;
-	char	**line;
+	char	*line;
+	char	**word;
 
-	line = ft_split(get_next_line(fd), ' ');
+	line = get_next_line(fd);
+	word = ft_split(line, ' ');
 	if (!line[0])
 		return (-1);
 	x = 1;
 	i = (y - 1) * data->x;
 	while (x <= data->x)
 	{
-		data->map[i].x = x++;
+		data->map[i].x = x;
 		data->map[i].y = y;
-		data->map[i].z = 0;
+		data->map[i].z = ft_atoi(word[x - 1]);
+		x++;
 		i++;
 	}
-	ft_free_split(line);
-	return (0);
+	return (free(line), ft_free_split(word), 0);
 }
