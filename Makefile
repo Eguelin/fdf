@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/20 13:58:43 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/21 14:18:13 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,35 +47,35 @@ HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OUT_DIR) $(OBJS) mylib
-	@norminette | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
+$(NAME): $(OUT_DIR) $(OBJS) | mylib
 	$(CC) $(CFLAGS) $(OBJS) lib/mylib/mylib.a -o $(NAME)
-	@echo $(COMP_MSG)
+	echo $(COMP_MSG)
+	norminette | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	@make clean -C ./lib/mylib
-	@$(RM) $(OUT_DIR)
-	@echo $(CLEAN_MSG)
+	make clean -sC ./lib/mylib
+	$(RM) $(OUT_DIR)
+	echo $(CLEAN_MSG)
 
 .PHONY: fclean
 fclean:
-	@make fclean -C ./lib/mylib
-	@$(RM) $(NAME) $(OUT_DIR)
-	@echo $(FULL_CLEAN_MSG)
+	make fclean -sC ./lib/mylib
+	$(RM) $(NAME) $(OUT_DIR)
+	echo $(FULL_CLEAN_MSG)
 
 .PHONY: re
 re: fclean all
 
 .PHONY: mylib
 mylib:
-	@make -C ./lib/mylib
+	$(MAKE) -sC ./lib/mylib
 
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 	mkdir -p $(OUT_DIR)$(PARS_DIR)
 
-
+.SILENT:
