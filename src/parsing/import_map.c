@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 17:05:02 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 17:10:45 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_import_coord(int fd, int y, t_data *data)
 {
 	int	i;
 	int	x;
-	//char	**line;
+	char	**line;
 
 	x = 1;
 	i = fd;
