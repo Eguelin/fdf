@@ -6,11 +6,25 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 10:07:01 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/21 10:34:31 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	ft_import_map(const char *path, t_data *data)
+{
+	//int	i;
+	int	size;
+
+	//i = 0;
+	ft_size_file(path, data);
+	size = (data->x * data->y) + 1;
+	data->map = malloc(sizeof(t_coord) * size);
+	if (!(data->map))
+		return (-1);
+	return (0);
+}
 
 void	ft_size_file(const char *path, t_data *data)
 {
