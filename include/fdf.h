@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/22 12:44:37 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 14:19:21 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_data
 	int		y;
 }				t_data;
 
-void	ft_size_file(const char *path, t_data *data);
 int		ft_import_map(const char *path, t_data *data);
 
 #endif
