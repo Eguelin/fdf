@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 17:48:58 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 10:24:30 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	ft_import_coord(int fd, int y, t_data *data)
 	i = (y - 1) * data->x;
 	while (x <= data->x)
 	{
-		data->map[i].x = x;
-		data->map[i].y = y;
+		data->map[i].x = x - (data->x / 2);
+		data->map[i].y = y - (data->y / 2);
 		data->map[i].z = ft_atoi(word[x - 1]);
 		x++;
 		i++;
