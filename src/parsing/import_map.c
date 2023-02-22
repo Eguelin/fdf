@@ -6,13 +6,14 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/22 10:24:30 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 14:19:19 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_import_coord(int fd, int y, t_data *data);
+static void	ft_size_file(const char *path, t_data *data);
+static int	ft_import_coord(int fd, int y, t_data *data);
 
 int	ft_import_map(const char *path, t_data *data)
 {
@@ -38,7 +39,7 @@ int	ft_import_map(const char *path, t_data *data)
 	return (0);
 }
 
-void	ft_size_file(const char *path, t_data *data)
+static void	ft_size_file(const char *path, t_data *data)
 {
 	char	buf[26];
 	char	c;
@@ -65,7 +66,7 @@ void	ft_size_file(const char *path, t_data *data)
 	close(fd);
 }
 
-int	ft_import_coord(int fd, int y, t_data *data)
+static int	ft_import_coord(int fd, int y, t_data *data)
 {
 	int		i;
 	int		x;
