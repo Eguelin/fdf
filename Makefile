@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/22 13:25:03 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/22 13:51:32 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,11 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
+FILES_ALL = main
+
 PARS_DIR = parsing/
-FILES_PARS = import_map main
-FILES_ALL = $(addprefix $(PARS_DIR), $(FILES_PARS))
+FILES_PARS = import_map
+FILES_ALL += $(addprefix $(PARS_DIR), $(FILES_PARS))
 
 OBJS		= $(addprefix $(OUT_DIR), $(addsuffix .o, $(FILES_ALL)))
 HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
