@@ -6,13 +6,14 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/21 10:33:14 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 12:44:37 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "../lib/mylib/include/mylib.h"
+# include "../lib/minilibx-linux/mlx.h"
 # include <fcntl.h>
 
 typedef struct s_image {
