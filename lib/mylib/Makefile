@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/21 17:36:14 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/22 12:57:36 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,33 +84,35 @@ HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 all: $(NAME)
 
 $(NAME): $(OUT_DIR) $(OBJS)
-	@norminette | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
-	@$(ARC) $(NAME) $(OBJS)
-	@echo $(COMP_MSG)
+	norminette | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
+	$(ARC) $(NAME) $(OBJS)
+	echo $(COMP_MSG)
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	@$(RM) $(OUT_DIR)
-	@echo $(CLEAN_MSG)
+	$(RM) $(OUT_DIR)
+	echo $(CLEAN_MSG)
 
 .PHONY: fclean
 fclean:
-	@$(RM) $(NAME) $(OUT_DIR)
-	@echo $(FULL_CLEAN_MSG)
+	$(RM) $(NAME) $(OUT_DIR)
+	echo $(FULL_CLEAN_MSG)
 
 .PHONY: re
 re: fclean all
 
 $(OUT_DIR):
-	@mkdir -p $(OUT_DIR)
-	@mkdir -p $(OUT_DIR)$(GNL_DIR)
-	@mkdir -p $(OUT_DIR)$(IS_DIR)
-	@mkdir -p $(OUT_DIR)$(LST_DIR)
-	@mkdir -p $(OUT_DIR)$(MEM_DIR)
-	@mkdir -p $(OUT_DIR)$(OTHER_DIR)
-	@mkdir -p $(OUT_DIR)$(PRINT_DIR)
-	@mkdir -p $(OUT_DIR)$(PUT_DIR)
-	@mkdir -p $(OUT_DIR)$(STR_DIR)
+	mkdir -p $(OUT_DIR)
+	mkdir -p $(OUT_DIR)$(GNL_DIR)
+	mkdir -p $(OUT_DIR)$(IS_DIR)
+	mkdir -p $(OUT_DIR)$(LST_DIR)
+	mkdir -p $(OUT_DIR)$(MEM_DIR)
+	mkdir -p $(OUT_DIR)$(OTHER_DIR)
+	mkdir -p $(OUT_DIR)$(PRINT_DIR)
+	mkdir -p $(OUT_DIR)$(PUT_DIR)
+	mkdir -p $(OUT_DIR)$(STR_DIR)
+
+.SILENT:
