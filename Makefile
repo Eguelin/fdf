@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/21 14:18:13 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/22 13:25:03 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INC_DIR	= include/
 NAME	= fdf
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR)
+MLX		= -Lmlx_linux -lmlx_Linux -L ./lib/minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
 
@@ -47,23 +48,25 @@ HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OUT_DIR) $(OBJS) | mylib
-	$(CC) $(CFLAGS) $(OBJS) lib/mylib/mylib.a -o $(NAME)
+$(NAME): $(OUT_DIR) $(OBJS) | mylib minilibx
+	$(CC) $(CFLAGS) $(OBJS) lib/mylib/mylib.a $(MLX) -o $(NAME)
 	echo $(COMP_MSG)
-	norminette | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
+	norminette ./src | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	make clean -sC ./lib/mylib
+	$(MAKE) clean -sC ./lib/mylib
+	$(MAKE) clean -sC ./lib/minilibx-linux
 	$(RM) $(OUT_DIR)
 	echo $(CLEAN_MSG)
 
 .PHONY: fclean
 fclean:
-	make fclean -sC ./lib/mylib
+	$(MAKE) fclean -sC ./lib/mylib
+	$(MAKE) clean -sC ./lib/minilibx-linux
 	$(RM) $(NAME) $(OUT_DIR)
 	echo $(FULL_CLEAN_MSG)
 
@@ -73,6 +76,10 @@ re: fclean all
 .PHONY: mylib
 mylib:
 	$(MAKE) -sC ./lib/mylib
+
+.PHONY: minilibx
+minilibx:
+	$(MAKE) -sC ./lib/minilibx-linux
 
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
