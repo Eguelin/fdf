@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/22 14:19:27 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/22 19:55:42 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_DIR	= src/
 INC_DIR	= include/
 NAME	= fdf
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR)
+CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR) -fsanitize=address -g3
 MLX		= -Lmlx_linux -lmlx_Linux -L ./lib/minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -42,6 +42,8 @@ FILES_ALL = main
 PARS_DIR = parsing/
 FILES_PARS = import_map
 FILES_ALL += $(addprefix $(PARS_DIR), $(FILES_PARS))
+
+INC_FILES = fdf
 
 OBJS		= $(addprefix $(OUT_DIR), $(addsuffix .o, $(FILES_ALL)))
 HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
