@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/22 14:19:21 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 15:15:45 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 # include "../lib/mylib/include/mylib.h"
 # include "../lib/minilibx-linux/mlx.h"
 # include <fcntl.h>
+# include <math.h>
+
+# ifndef AgA
+#  define AgA (3.141593 / 180) * 80
+# endif
+
+# ifndef AgW
+#  define AgW (3.141593 / 180) * 80
+# endif
 
 typedef struct s_image {
 	void	*img;
@@ -25,9 +34,9 @@ typedef struct s_image {
 }				t_img;
 
 typedef struct s_coordinates {
-	int		x;
-	int		y;
-	int		z;
+	float	x;
+	float	y;
+	float	z;
 }				t_coord;
 
 typedef struct s_data
