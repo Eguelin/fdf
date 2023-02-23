@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/22 14:19:19 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 14:54:40 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	ft_import_coord(int fd, int y, t_data *data);
 
 int	ft_import_map(const char *path, t_data *data)
 {
-	int	fd;
-	int	y;
+	int		fd;
+	int		y;
 
 	y = 1;
 	ft_size_file(path, data);
@@ -81,8 +81,8 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 	i = (y - 1) * data->x;
 	while (x <= data->x)
 	{
-		data->map[i].x = x - (data->x / 2);
-		data->map[i].y = y - (data->y / 2);
+		data->map[i].x = (x - (((float)data->x +1) / 2));
+		data->map[i].y = (y - (((float)data->y +1) / 2));
 		data->map[i].z = ft_atoi(word[x - 1]);
 		x++;
 		i++;
