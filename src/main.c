@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/24 17:35:40 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 17:40:23 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,6 @@ int	main(int argc, char const *argv[])
 	data.c = RAD * 30;
 	(void)argc;
 	ft_import_map(argv[1], &data);
-	printf("x = %d y = %d \n", data.x, data.y);
-	while (i < data.x * data.y)
-	{
-		printf("%d. x = %f y = %f z = %f\n", i, data.map[i].x, \
-		data.map[i].y, data.map[i].z);
-		i++;
-	}
-	i = 0;
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, 3840, 2160, "Hello world!");
 	data.img.img = mlx_new_image(data.mlx, 3840, 2160);
