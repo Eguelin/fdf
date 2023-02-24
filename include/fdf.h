@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/23 15:15:45 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 14:08:52 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-# ifndef AgA
-#  define AgA (3.141593 / 180) * 80
-# endif
-
-# ifndef AgW
-#  define AgW (3.141593 / 180) * 80
+# ifndef RAD
+#  define RAD (3.141593 / 180)
 # endif
 
 typedef struct s_image {
@@ -47,6 +43,10 @@ typedef struct s_data
 	t_coord	*map;
 	int		x;
 	int		y;
+	float	a;
+	float	b;
+	float	c;
+
 }				t_data;
 
 int		ft_import_map(const char *path, t_data *data);
