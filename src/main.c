@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/24 17:40:23 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 18:57:18 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,46 @@ void matrix_calculation(float *x, float *y, float *z, float	mr[3][3])
 	*z = tmp_z;
 }
 
-void rotation_matrix(t_data *data)
+void rotation_x(t_data data, float	rotation[3][3])
+{
+	rotation[0][0] = 1;
+	rotation[0][1] = 0;
+	rotation[0][2] = 0;
+	rotation[1][0] = 0;
+	rotation[1][1] = cos(data.a);
+	rotation[1][2] = -sin(data.a);
+	rotation[2][0] = 0;
+	rotation[2][1] = sin(data.a);
+	rotation[2][2] = cos(data.a);
+}
+
+void rotation_y(t_data data, float	rotation[3][3])
+{
+	rotation[0][0] = cos(data.b);
+	rotation[0][1] = 0;
+	rotation[0][2] = sin(data.b);
+	rotation[1][0] = 0;
+	rotation[1][1] = 1;
+	rotation[1][2] = 0;
+	rotation[2][0] = -sin(data.b);
+	rotation[2][1] = 0;
+	rotation[2][2] = cos(data.b);
+}
+
+void rotation_z(t_data data, float	rotation[3][3])
+{
+	rotation[0][0] = cos(data.c);
+	rotation[0][1] = -sin(data.c);
+	rotation[0][2] = 0;
+	rotation[1][0] = sin(data.c);
+	rotation[1][1] = cos(data.c);
+	rotation[1][2] = 0;
+	rotation[2][0] = 0;
+	rotation[2][1] = 0;
+	rotation[2][2] = 1;
+}
+
+/*void rotation_matrix(t_data *data)
 {
 	float	rx[3][3] = {{1, 0, 0}, {0, cos(data->a), -sin(data->a)}, {0, sin(data->a), cos(data->a)}};
 	float	ry[3][3] = {{cos(data->b), 0, sin(data->b)}, {0, 1, 0}, {-sin(data->b), 0, cos(data->b)}};
@@ -50,15 +89,35 @@ void rotation_matrix(t_data *data)
 		matrix_calculation(&data->map[i].x, &data->map[i].y, &data->map[i].z, rz);
 		i++;
 	}
+}*/
+
+void rotation_matrix(t_data data, int i, int *x, int *y)
+{
+	float	rx[3][3];
+	float	ry[3][3];
+	float	rz[3][3];
+
+	rotation_x(data, rx);
+	rotation_y(data, ry);
+	rotation_z(data, rz);
+	matrix_calculation(&data.map[i].x, &data.map[i].y, &data.map[i].z, rx);
+	matrix_calculation(&data.map[i].x, &data.map[i].y, &data.map[i].z, ry);
+	matrix_calculation(&data.map[i].x, &data.map[i].y, &data.map[i].z, rz);
+	*x = data.map[i].x;
+	*y = data.map[i].y;
 }
 
 int	main(int argc, char const *argv[])
 {
 	t_data	data;
 	int		i;
+	int		x;
+	int		y;
 
 	i = 0;
 	data.x = 0;
+	data.y = 0;
+	x = 0;
 	data.y = 0;
 	data.a = RAD * 30;
 	data.b = RAD * -30;
@@ -70,11 +129,11 @@ int	main(int argc, char const *argv[])
 	data.img.img = mlx_new_image(data.mlx, 3840, 2160);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, \
 	&data.img.line_length, &data.img.endian);
-	rotation_matrix(&data);
 	while (i < data.x * data.y)
 	{
+		rotation_matrix(data, i, &x, &y);
 		if (data.map[i].x * 10 + 1920 >= 0 && data.map[i].x * 10 + 1920 <= 3840 && data.map[i].y * 10 + 1080 >= 0 && data.map[i].y * 10 + 1080 <= 2160)
-			ft_mlx_pixel_put(&data.img, data.map[i].x * 10 + 1920, data.map[i].y * 10 + 1080, 0x00FFFFFF);
+			ft_mlx_pixel_put(&data.img, data.map[i].x * 10 + 1920, data.map[i].y * 10 + 1080, (0x00FFFFFF));
 		i++;
 	}
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img, 0, 0);
