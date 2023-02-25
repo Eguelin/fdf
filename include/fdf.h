@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/24 14:08:52 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/25 12:48:29 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_coordinates {
 	float	x;
 	float	y;
 	float	z;
+	float	x_bis;
+	float	y_bis;
+	float	z_bis;
 }				t_coord;
 
 typedef struct s_data
@@ -41,8 +44,8 @@ typedef struct s_data
 	void	*mlx_win;
 	t_img	img;
 	t_coord	*map;
-	int		x;
-	int		y;
+	int		x_max;
+	int		y_max;
 	float	a;
 	float	b;
 	float	c;
@@ -50,5 +53,6 @@ typedef struct s_data
 }				t_data;
 
 int		ft_import_map(const char *path, t_data *data);
+void 	ft_rotation_matrix(t_data *data);
 
 #endif
