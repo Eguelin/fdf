@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/25 13:12:04 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/25 13:13:30 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,7 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
-FILES_ALL = main matrix
-
-PARS_DIR = parsing/
-FILES_PARS = import_map
-FILES_ALL += $(addprefix $(PARS_DIR), $(FILES_PARS))
+FILES_ALL = main matrix import_map
 
 INC_FILES = fdf
 
@@ -87,6 +83,5 @@ minilibx:
 
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
-	mkdir -p $(OUT_DIR)$(PARS_DIR)
 
 .SILENT:
