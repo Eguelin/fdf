@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/25 12:47:45 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/25 13:12:04 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,4 +89,4 @@ $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 	mkdir -p $(OUT_DIR)$(PARS_DIR)
 
-#.SILENT:
+.SILENT:
