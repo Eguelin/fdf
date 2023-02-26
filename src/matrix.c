@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:32:01 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/25 12:53:28 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 13:47:00 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_rotation_matrix(t_data *data)
 		&data->map[i].z_bis, ry);
 		ft_matrix_calculation(&data->map[i].x_bis, &data->map[i].y_bis, \
 		&data->map[i].z_bis, rz);
+		data->map[i].x_bis = data->map[i].x_bis + (float)data->length / 2;
+		data->map[i].y_bis = data->map[i].y_bis + (float)data->height / 2;
 		i++;
 	}
 }
