@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/25 12:55:32 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 14:21:38 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_size_file(const char *path, t_data *data);
 static int	ft_import_coord(int fd, int y, t_data *data);
 
-int	ft_import_map(const char *path, t_data *data)
+void	ft_import_map(const char *path, t_data *data)
 {
 	int		fd;
 	int		y;
@@ -24,32 +24,33 @@ int	ft_import_map(const char *path, t_data *data)
 	ft_size_file(path, data);
 	data->map = malloc(sizeof(t_coord) * data->x_max * data->y_max);
 	if (!(data->map))
-		return (-1);
+		exit (1);
 	fd = open(path, O_RDONLY);
 	while (y <= data->y_max)
 	{
 		if (ft_import_coord(fd, y, data))
 		{
-			return (-1);
 			close(fd);
+			exit (1);
 		}
 		y++;
 	}
 	close(fd);
-	return (0);
 }
 
 static void	ft_size_file(const char *path, t_data *data)
 {
-	char	buf[26];
+	char	buf[BUFFER_SIZE + 1];
 	char	c;
 	int		i;
 	int		fd;
 
 	fd = open(path, O_RDONLY);
-	ft_bzero(buf, 26);
+	if (fd == -1)
+		exit (1);
+	ft_bzero(buf, BUFFER_SIZE + 1);
 	c = ' ';
-	while (read(fd, buf, 25))
+	while (read(fd, buf, BUFFER_SIZE))
 	{
 		i = 0;
 		while (buf[i])
@@ -60,8 +61,7 @@ static void	ft_size_file(const char *path, t_data *data)
 			if (buf[i] == '\n')
 				data->y_max++;
 			c = buf[i];
-			buf[i] = 0;
-			i++;
+			buf[i++] = 0;
 		}
 	}
 	close(fd);
@@ -75,9 +75,11 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 	char	**word;
 
 	line = get_next_line(fd);
+	if (!line)
+		return (1);
 	word = ft_split(line, ' ');
-	if (!line[0])
-		return (-1);
+	if (!word)
+		return (free(line), 1);
 	x = 1;
 	i = (y - 1) * data->x_max;
 	while (x <= data->x_max)
@@ -85,9 +87,9 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 		data->map[i].x = (x - (((float)data->x_max +1) / 2));
 		data->map[i].y = (y - (((float)data->y_max +1) / 2));
 		data->map[i].z = ft_atoi(word[x - 1]);
-		data->map[i].x_bis = data->map[i].x;
-		data->map[i].y_bis = data->map[i].y;
-		data->map[i].z_bis = data->map[i].z;
+		data->map[i].x_bis = data->map[i].x * data->zoom;
+		data->map[i].y_bis = data->map[i].y * data->zoom;
+		data->map[i].z_bis = data->map[i].z * data->zoom;
 		x++;
 		i++;
 	}
