@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/02/25 13:13:30 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/02/25 19:38:36 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_DIR	= src/
 INC_DIR	= include/
 NAME	= fdf
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR) -fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR) -fsanitize=address -g3 -Ofast -O1
 MLX		= -Lmlx_linux -lmlx_Linux -L ./lib/minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
