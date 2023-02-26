@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/25 16:09:33 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 19:45:09 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ typedef struct s_data
 
 void	ft_import_map(const char *path, t_data *data);
 void 	ft_rotation_matrix(t_data *data);
-void	ft_exit(t_data *data, int fd, int i);
 
 #endif
