@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/26 14:04:42 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/26 19:47:35 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,39 @@ void	ft_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	ft_exit(t_data *data, int fd, int i)
+int	ft_close(t_data *data)
 {
-	free(data->map);
 	mlx_destroy_image(data->mlx ,data->img.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
-	if (fd)
-		close(fd);
-	exit(i);
+	free(data->mlx);
+	free(data->map);
+	exit(0);
+}
+
+/*key = 113
+key = 119
+key = 101
+key = 97
+key = 115
+key = 100*/
+
+int	key_hook(int keycode, t_data *data)
+{
+	if (keycode == 65307)
+		ft_close(data);
+	printf("key = %d\n", keycode);
+	return (0);
+}
+
+int	ft_exit(t_data *data)
+{
+	mlx_destroy_image(data->mlx ,data->img.img);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	free(data->map);
+	exit(1);
 }
 
 float	highest(float dx, float dy)
@@ -74,9 +98,9 @@ int	main(int argc, char const *argv[])
 	i = 0;
 	data.x_max = 0;
 	data.y_max = 0;
-	data.height = 2160;
-	data.length = 3840;
-	data.zoom = 8;
+	data.height = 2000;
+	data.length = 3000;
+	data.zoom = 5;
 	data.a = RAD * 45;
 	data.b = RAD * -35;
 	data.c = RAD * 30;
@@ -84,13 +108,13 @@ int	main(int argc, char const *argv[])
 	ft_import_map(argv[1], &data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
-		exit(0);
-	data.mlx_win = mlx_new_window(data.mlx, 3840, 2160, "Fdf");
+		exit(1);
+	data.mlx_win = mlx_new_window(data.mlx, data.length, data.height, "Fdf");
 	if (!data.mlx_win)
-		exit(0);
-	data.img.img = mlx_new_image(data.mlx, 3840, 2160);
+		ft_exit(&data);
+	data.img.img = mlx_new_image(data.mlx, data.length, data.height);
 	if (!data.img.img)
-		exit(0);
+		ft_exit(&data);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, \
 	&data.img.line_length, &data.img.endian);
 	ft_rotation_matrix(&data);
@@ -103,7 +127,8 @@ int	main(int argc, char const *argv[])
 		i++;
 	}
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img, 0, 0);
+	mlx_hook(data.mlx_win, 17, 0, ft_close, &data);
+	mlx_key_hook(data.mlx_win, key_hook, &data);
 	mlx_loop(data.mlx);
-	ft_exit(&data, 0, 0);
 	return (0);
 }
