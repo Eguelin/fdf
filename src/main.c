@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/27 18:44:37 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 20:23:06 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ int	key_hook(int keycode, t_data *data)
 		data->b += RAD * 1;
 	else if (keycode == 100)
 		data->b += RAD * 1;
+	else if (keycode == 65451 && data->zoom < 19000)
+		data->zoom *= 1.1;
+	else if (keycode == 65453 && data->zoom > 0.05)
+		data->zoom *= 0.9;
 	ft_image(data);
-	printf("key = %d\n", keycode);
 	return (0);
 }
 
@@ -83,29 +86,6 @@ float	highest(float dx, float dy)
 	return (dy);
 }
 
-void	ft_line2(t_data *data, t_coord coord1, t_coord coord2)
-{
-	float	dx;
-	float	dy;
-	float	dmax;
-
-	dx = coord2.x_bis - coord1.x_bis;
-	dy = coord2.y_bis - coord1.y_bis;
-	dmax = highest(dx, dy);
-	dx /= dmax;
-	dy /= dmax;
-	while (dmax > 0)
-	{
-		if (coord1.x_bis < 0 || coord1.x_bis > data->length || \
-		coord1.y_bis < 0 || coord1.y_bis > data->height)
-			break ;
-		ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, 0x00FFFFFF);
-		coord1.x_bis += dx;
-		coord1.y_bis += dy;
-		dmax--;
-	}
-}
-
 void	ft_line(t_data *data, t_coord coord1, t_coord coord2)
 {
 	float	dx;
@@ -119,13 +99,9 @@ void	ft_line(t_data *data, t_coord coord1, t_coord coord2)
 	dy /= dmax;
 	while (dmax > 0)
 	{
-		if (coord1.x_bis < 0 || coord1.x_bis > data->length || \
-		coord1.y_bis < 0 || coord1.y_bis > data->height)
-		{
-			ft_line2(data, coord2, coord1);
-			break ;
-		}
-		ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, 0x00FFFFFF);
+		if (!(coord1.x_bis < 0 || coord1.x_bis > data->length || \
+		coord1.y_bis < 0 || coord1.y_bis > data->height))
+			ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, 0x00FFFFFF);
 		coord1.x_bis += dx;
 		coord1.y_bis += dy;
 		dmax--;
@@ -167,14 +143,16 @@ int	main(int argc, char const *argv[])
 
 	data.x_max = 0;
 	data.y_max = 0;
-	data.height = 2000;
-	data.length = 3000;
-	data.zoom = 5;
+	data.height = 2058;
+	data.length = 3840;
+	data.mid_height = data.height / 2;
+	data.mid_length = data.length / 2;
 	data.a = RAD * 45;
 	data.b = RAD * -35;
 	data.c = RAD * 30;
 	(void)argc;
 	ft_import_map(argv[1], &data);
+	data.zoom = data.x_max * -0.15 + 79;
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		exit(1);

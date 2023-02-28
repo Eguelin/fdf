@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:32:01 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/27 18:46:12 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 19:20:50 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ void	ft_rotation_matrix(t_data *data)
 	ft_rotation_z(data, rz);
 	while (i < data->x_max * data->y_max)
 	{
-		data->map[i].x_bis = data->map[i].x * data->zoom;
-		data->map[i].y_bis = data->map[i].y * data->zoom;
-		data->map[i].z_bis = data->map[i].z * data->zoom;
+		data->map[i].x_bis = data->map[i].x;
+		data->map[i].y_bis = data->map[i].y;
+		data->map[i].z_bis = data->map[i].z;
 		ft_matrix_calculation(&data->map[i].x_bis, &data->map[i].y_bis, \
 		&data->map[i].z_bis, rx);
 		ft_matrix_calculation(&data->map[i].x_bis, &data->map[i].y_bis, \
 		&data->map[i].z_bis, ry);
 		ft_matrix_calculation(&data->map[i].x_bis, &data->map[i].y_bis, \
 		&data->map[i].z_bis, rz);
-		data->map[i].x_bis = data->map[i].x_bis + (float)data->length / 2;
-		data->map[i].y_bis = data->map[i].y_bis + (float)data->height / 2;
+		data->map[i].x_bis = data->map[i].x_bis * data->zoom + data->mid_length;
+		data->map[i].y_bis = data->map[i].y_bis * data->zoom + data->mid_height;
 		i++;
 	}
 }
