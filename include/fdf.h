@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/26 19:45:09 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 19:29:06 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ typedef struct s_data
 	int		y_max;
 	int		height;
 	int		length;
-	int		zoom;
+	float	zoom;
+	int		mid_height;
+	int		mid_length;
 	float	a;
 	float	b;
 	float	c;
