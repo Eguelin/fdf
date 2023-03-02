@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/03/01 16:56:14 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/03/02 17:34:30 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
-FILES_ALL = main projection image import_map
+FILES_ALL = main projection image import_map hook tool
 
 INC_FILES = fdf
 
@@ -51,7 +51,7 @@ all: $(NAME)
 $(NAME): $(OUT_DIR) $(OBJS) | mylib minilibx
 	$(CC) $(CFLAGS) $(OBJS) lib/mylib/mylib.a $(MLX) -o $(NAME)
 	echo $(COMP_MSG)
-	norminette ./src | awk '$$NF!="OK!" {print "\033[0;31m" $$0 "\033[0m"}'
+	norminette ./src | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
