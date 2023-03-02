@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/27 18:45:41 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 17:48:39 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ void	ft_import_map(const char *path, t_data *data)
 	ft_size_file(path, data);
 	data->map = malloc(sizeof(t_coord) * data->x_max * data->y_max);
 	if (!(data->map))
-		exit (1);
+		exit(1);
 	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		exit(1);
 	while (y <= data->y_max)
 	{
 		if (ft_import_coord(fd, y, data))
 		{
 			close(fd);
-			exit (1);
+			free(data->map);
+			exit(1);
 		}
 		y++;
 	}
@@ -47,7 +50,7 @@ static void	ft_size_file(const char *path, t_data *data)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		exit (1);
+		exit(1);
 	ft_bzero(buf, BUFFER_SIZE + 1);
 	c = ' ';
 	while (read(fd, buf, BUFFER_SIZE))
