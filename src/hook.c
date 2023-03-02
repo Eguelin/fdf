@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:20:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/02 17:30:51 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 00:03:35 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	key_hook(int keycode, t_data *data)
 {
 	float	one_degree;
 
-	one_degree = 0.017453293;
+	one_degree = PI / 180;
 	if (keycode == ESC)
 		ft_close(data);
 	else if (keycode == Q)
