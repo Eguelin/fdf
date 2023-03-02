@@ -3,20 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/03/02 17:34:30 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/03/03 00:32:35 by emilien          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 #Standard
-OUT_DIR	= build/
-SRC_DIR	= src/
-INC_DIR	= include/
+OUT_DIR	= build
+SRC_DIR	= src
+INC_DIR	= include
+LIB_DIR	= lib
 NAME	= fdf
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR)
+CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR)/ -fsanitize=address -g3
 MLX		= -Lmlx_linux -lmlx_Linux -L ./lib/minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -37,51 +38,46 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
-FILES_ALL = main projection image import_map hook tool
-
-INC_FILES = fdf
-
-OBJS		= $(addprefix $(OUT_DIR), $(addsuffix .o, $(FILES_ALL)))
-HEADERS		= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
+FILES		= $(shell find $(SRC_DIR) -type f | awk -F "." '$$NF=="c" {print $$0}' | awk -F "$(SRC_DIR)" '{print $$NF}')
+OBJS		= $(addprefix $(OUT_DIR), $(FILES:.c=.o))
+HEADERS		= $(shell find $(INC_DIR) -type f | awk -F "." '$$NF=="h" {print $$0}')
+LIB			= $(shell find $(LIB_DIR)/mylib -type f | awk -F "." '$$NF=="a" {print $$0}')
 
 #Rules
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OUT_DIR) $(OBJS) | mylib minilibx
-	$(CC) $(CFLAGS) $(OBJS) lib/mylib/mylib.a $(MLX) -o $(NAME)
+$(NAME): $(OUT_DIR) $(OBJS) | lib
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $(NAME)
 	echo $(COMP_MSG)
-	norminette ./src | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
+$(OUT_DIR)/%.o : $(SRC_DIR)/%.c $(HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	$(MAKE) clean -sC ./lib/mylib
 	$(MAKE) clean -sC ./lib/minilibx-linux
+	$(MAKE) clean -sC ./lib/mylib
 	$(RM) $(OUT_DIR)
 	echo $(CLEAN_MSG)
 
 .PHONY: fclean
-fclean:
+fclean: clean
 	$(MAKE) fclean -sC ./lib/mylib
-	$(MAKE) clean -sC ./lib/minilibx-linux
-	$(RM) $(NAME) $(OUT_DIR)
+	$(RM) $(NAME)
 	echo $(FULL_CLEAN_MSG)
 
 .PHONY: re
 re: fclean all
 
-.PHONY: mylib
-mylib:
+.PHONY: lib
+lib:
+	$(MAKE) -sC ./lib/minilibx-linux
 	$(MAKE) -sC ./lib/mylib
 
-.PHONY: minilibx
-minilibx:
-	$(MAKE) -sC ./lib/minilibx-linux
-
 $(OUT_DIR):
-	mkdir -p $(OUT_DIR)
+	mkdir -p $(shell find $(SRC_DIR) -type d | awk -F "$(SRC_DIR)" '$$NF!="$(SRC_DIR)" {print "$(OUT_DIR)"$$(NF)}')
 
 .SILENT:
