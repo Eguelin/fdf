@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/01 16:57:07 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:09:39 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_image(t_data *data)
 	i = 0;
 	x_max = -0.5 + (float)data->x_max / 2;
 	y_max = -0.5 + (float)data->y_max / 2;
-	data->img.img = mlx_new_image(data->mlx, data->length, data->height);
+	data->img.img = mlx_new_image(data->mlx, LENGTH, HEIGHT);
 	if (!data->img.img)
 		ft_exit(data);
 	data->img.addr = mlx_get_data_addr(data->img.img, \
@@ -50,10 +50,10 @@ static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 	float	dmax;
 
 	if ((coord1.y_bis < 0 && coord2.y_bis < 0) || \
-	(coord1.y_bis > data->height && coord2.y_bis > data->height))
+	(coord1.y_bis > HEIGHT && coord2.y_bis > HEIGHT))
 		return ;
 	else if ((coord1.x_bis < 0 && coord2.x_bis < 0) || \
-	(coord1.x_bis > data->length && coord2.x_bis > data->length))
+	(coord1.x_bis > LENGTH && coord2.x_bis > LENGTH))
 		return ;
 	dx = coord2.x_bis - coord1.x_bis;
 	dy = coord2.y_bis - coord1.y_bis;
@@ -62,8 +62,8 @@ static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 	dy /= dmax;
 	while (dmax > 0)
 	{
-		if (!(coord1.x_bis < 0 || coord1.x_bis > data->length || \
-		coord1.y_bis < 0 || coord1.y_bis > data->height))
+		if (!(coord1.x_bis < 0 || coord1.x_bis > LENGTH || \
+		coord1.y_bis < 0 || coord1.y_bis > HEIGHT))
 			ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, \
 			0x00FFFFFF);
 		coord1.x_bis += dx;
