@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/01 19:11:35 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 17:50:10 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <math.h>
 
 # define RAD (3.141592653589793 / 180)
+# define HEIGHT 2058
+# define LENGTH 3840
 
 # define ESC 65307
 # define F1 65470
@@ -121,8 +123,6 @@ typedef struct s_data
 	t_coord	*map;
 	int		x_max;
 	int		y_max;
-	int		height;
-	int		length;
 	float	intensity;
 	float	mid_height;
 	float	mid_length;
@@ -133,9 +133,14 @@ typedef struct s_data
 
 }				t_data;
 
+void	ft_init_fdf(t_data *data, const char *arg);
 void	ft_import_map(const char *path, t_data *data);
 void 	ft_projection(t_data *data);
+
 int		ft_image(t_data *data);
+int		ft_close(t_data *data);
 int		ft_exit(t_data *data);
+int		key_hook(int keycode, t_data *data);
+int		mouse_hook(int button, int x, int y, t_data *data);
 
 #endif
