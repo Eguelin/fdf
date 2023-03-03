@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/02 23:58:18 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 19:55:36 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,82 +21,82 @@
 # define HEIGHT 2058
 # define LENGTH 3840
 
-# define ESC 65307
-# define F1 65470
-# define F2 65471
-# define F3 65472
-# define F4 65473
-# define F5 65474
-# define F6 65475
-# define F7 65476
-# define F8 65477
-# define F9 65478
-# define F10 65479
-# define F11 65480
-# define F12 65481
-# define GRAVE_ACCENT 96
-# define ONE 49
-# define TWO 50
-# define THREE 51
-# define FOUR 52
-# define FIVE 53
-# define SIX 54
-# define SEVEN 55
-# define EIGHT 56
-# define NINE 57
-# define ZERO 48
-# define DASH_UNDERSCORE 45
-# define EQUALS_PLUS 61
-# define BACKSPACE 65288
-# define TAB 65289
-# define Q 113
-# define W 119
-# define E 101
-# define R 114
-# define T 116
-# define Y 121
-# define U 117
-# define I 105
-# define O 111
-# define P 112
-# define OPEN_BRACKET 91
-# define CLOSE_BRACKET 93
-# define BACKSLASH 92
-# define CAPS_LOCK 65509
-# define A 97
-# define S 115
-# define D 100
-# define F 102
-# define G 103
-# define H 104
-# define J 106
-# define K 107
-# define L 108
-# define SEMICOLON 59
-# define SINGLE_QUOTE 39
-# define ENTER 65293
-# define LEFT_SHIFT 65505
-# define Z 122
-# define X 120
-# define C 99
-# define V 118
-# define B 98
-# define N 110
-# define M 109
-# define COMMA 44
-# define PERIOD 46
-# define SLASH 47
-# define RIGHT_SHIFT 65506
-# define LEFT_COMMAND 65507
-# define LEFT_ALT 65513
-# define SPACE 32
-# define RIGHT_ALT 65514
-# define MENU 65383
-# define RIGHT_COMMAND 65508
-# define UP_ARROW 65362
-# define LEFT_ARROW 65361
-# define DOWN_ARROW 65364
-# define RIGHT_ARROW 65363
+# define KEY_ESC 65307
+# define KEY_F1 65470
+# define KEY_F2 65471
+# define KEY_F3 65472
+# define KEY_F4 65473
+# define KEY_F5 65474
+# define KEY_F6 65475
+# define KEY_F7 65476
+# define KEY_F8 65477
+# define KEY_F9 65478
+# define KEY_F10 65479
+# define KEY_F11 65480
+# define KEY_F12 65481
+# define KEY_GRAVE_ACCENT 96
+# define KEY_1 49
+# define KEY_2 50
+# define KEY_3 51
+# define KEY_4 52
+# define KEY_5 53
+# define KEY_6 54
+# define KEY_7 55
+# define KEY_8 56
+# define KEY_9 57
+# define KEY_0 48
+# define KEY_DASH_UNDERSCORE 45
+# define KEY_EQUALS_PLUS 61
+# define KEY_BACKSPACE 65288
+# define KEY_TAB 65289
+# define KEY_Q 113
+# define KEY_W 119
+# define KEY_E 101
+# define KEY_R 114
+# define KEY_T 116
+# define KEY_Y 121
+# define KEY_U 117
+# define KEY_I 105
+# define KEY_O 111
+# define KEY_P 112
+# define KEY_OPEN_BRACKET 91
+# define KEY_CLOSE_BRACKET 93
+# define KEY_BACKSLASH 92
+# define KEY_CAPS_LOCK 65509
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_F 102
+# define KEY_G 103
+# define KEY_H 104
+# define KEY_J 106
+# define KEY_K 107
+# define KEY_L 108
+# define KEY_SEMICOLON 59
+# define KEY_SINGLE_QUOTE 39
+# define KEY_ENTER 65293
+# define KEY_LEFT_SHIFT 65505
+# define KEY_Z 122
+# define KEY_X 120
+# define KEY_C 99
+# define KEY_V 118
+# define KEY_B 98
+# define KEY_N 110
+# define KEY_M 109
+# define KEY_COMMA 44
+# define KEY_PERIOD 46
+# define KEY_SLASH 47
+# define KEY_RIGHT_SHIFT 65506
+# define KEY_LEFT_COMMAND 65507
+# define KEY_LEFT_ALT 65513
+# define KEY_SPACE 32
+# define KEY_RIGHT_ALT 65514
+# define KEY_MENU 65383
+# define KEY_RIGHT_COMMAND 65508
+# define KEY_UP_ARROW 65362
+# define KEY_LEFT_ARROW 65361
+# define KEY_DOWN_ARROW 65364
+# define KEY_RIGHT_ARROW 65363
 
 typedef struct s_image {
 	void	*img;
@@ -107,12 +107,13 @@ typedef struct s_image {
 }				t_img;
 
 typedef struct s_coordinates {
-	float	x;
-	float	y;
-	float	z;
-	float	x_bis;
-	float	y_bis;
-	float	z_bis;
+	float			x;
+	float			y;
+	float			z;
+	float			x_bis;
+	float			y_bis;
+	float			z_bis;
+	unsigned int	color;
 }				t_coord;
 
 typedef struct s_data
@@ -136,6 +137,10 @@ typedef struct s_data
 void	ft_init_fdf(t_data *data, const char *arg);
 void	ft_import_map(const char *path, t_data *data);
 void	ft_projection(t_data *data);
+void	ft_isometric(t_data *data);
+void	ft_revers_isometric(t_data *data);
+void	ft_front(t_data *data);
+void	ft_above(t_data *data);
 
 int		ft_image(t_data *data);
 int		ft_close(t_data *data);
