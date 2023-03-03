@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/03/03 00:32:35 by emilien          ###   ########lyon.fr    #
+#    Updated: 2023/03/03 13:24:04 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,7 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
-FILES		= $(shell find $(SRC_DIR) -type f | awk -F "." '$$NF=="c" {print $$0}' | awk -F "$(SRC_DIR)" '{print $$NF}')
-OBJS		= $(addprefix $(OUT_DIR), $(FILES:.c=.o))
+OBJS		= $(shell find $(SRC_DIR) -type f | awk -F "." '$$NF=="c" {print $$(NF - 1) ".o"}' | awk -F "$(SRC_DIR)" '{print "$(OUT_DIR)"$$NF}')
 HEADERS		= $(shell find $(INC_DIR) -type f | awk -F "." '$$NF=="h" {print $$0}')
 LIB			= $(shell find $(LIB_DIR)/mylib -type f | awk -F "." '$$NF=="a" {print $$0}')
 
