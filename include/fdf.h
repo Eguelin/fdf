@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/03 19:55:36 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 15:42:07 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,22 @@
 # define KEY_DOWN_ARROW 65364
 # define KEY_RIGHT_ARROW 65363
 
-typedef struct s_image {
+typedef struct s_trgb
+{
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	t;
+}				t_trgb;
+
+typedef union u_color
+{
+	t_trgb	argb;
+	int		code;
+}			t_color;
+
+typedef struct s_image
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -106,14 +121,15 @@ typedef struct s_image {
 	int		endian;
 }				t_img;
 
-typedef struct s_coordinates {
-	float			x;
-	float			y;
-	float			z;
-	float			x_bis;
-	float			y_bis;
-	float			z_bis;
-	unsigned int	color;
+typedef struct s_coordinates
+{
+	float	x;
+	float	y;
+	float	z;
+	float	x_bis;
+	float	y_bis;
+	float	z_bis;
+	t_color	color;
 }				t_coord;
 
 typedef struct s_data
@@ -131,7 +147,6 @@ typedef struct s_data
 	float	b;
 	float	c;
 	float	zoom;
-
 }				t_data;
 
 void	ft_init_fdf(t_data *data, const char *arg);

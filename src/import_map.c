@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   import_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/03 20:22:51 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 15:44:13 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 		data->map[i].x = (x - (((float)data->x_max +1) / 2));
 		data->map[i].y = (y - (((float)data->y_max +1) / 2));
 		data->map[i].z = ft_atoi(word[x - 1]);
-		data->map[i].color = ft_import_color(word[x - 1]);
+		data->map[i].color.code = ft_import_color(word[x - 1]);
 		x++;
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/03 20:05:04 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 15:43:28 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 		if (!(coord1.x_bis < 0 || coord1.x_bis > LENGTH || \
 		coord1.y_bis < 0 || coord1.y_bis > HEIGHT))
 			ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, \
-			coord1.color);
+			coord1.color.code);
 		coord1.x_bis += dx;
 		coord1.y_bis += dy;
 		dmax--;
