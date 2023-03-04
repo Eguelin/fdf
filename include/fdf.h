@@ -6,7 +6,7 @@
 /*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/04 15:42:07 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 17:41:37 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,6 @@ int		ft_close(t_data *data);
 int		ft_exit(t_data *data);
 int		key_hook(int keycode, t_data *data);
 int		mouse_hook(int button, int x, int y, t_data *data);
+int		ft_gradient_color(t_color *clr1, t_color *clr2, float line, int i);
 
 #endif

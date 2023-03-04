@@ -6,13 +6,14 @@
 /*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/04 15:43:28 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 17:19:26 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static void		ft_draw_line(t_data *data, t_coord coord1, t_coord coord2);
+static int		ft_in_screen(t_coord coord1, t_coord coord2);
 static float	highest(float dx, float dy);
 static void		ft_mlx_pixel_put(t_img *img, int x, int y, int color);
 
@@ -48,28 +49,37 @@ static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 	float	dx;
 	float	dy;
 	float	dmax;
+	int		i;
 
-	if ((coord1.y_bis < 0 && coord2.y_bis < 0) || \
-	(coord1.y_bis > HEIGHT && coord2.y_bis > HEIGHT))
+	if (ft_in_screen(coord1, coord2))
 		return ;
-	else if ((coord1.x_bis < 0 && coord2.x_bis < 0) || \
-	(coord1.x_bis > LENGTH && coord2.x_bis > LENGTH))
-		return ;
+	i = 0;
 	dx = coord2.x_bis - coord1.x_bis;
 	dy = coord2.y_bis - coord1.y_bis;
 	dmax = highest(dx, dy);
 	dx /= dmax;
 	dy /= dmax;
-	while (dmax > 0)
+	while (dmax > i)
 	{
 		if (!(coord1.x_bis < 0 || coord1.x_bis > LENGTH || \
 		coord1.y_bis < 0 || coord1.y_bis > HEIGHT))
 			ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, \
-			coord1.color.code);
+			ft_gradient_color(&coord1.color, &coord2.color, dmax, i));
 		coord1.x_bis += dx;
 		coord1.y_bis += dy;
-		dmax--;
+		i++;
 	}
+}
+
+static int	ft_in_screen(t_coord coord1, t_coord coord2)
+{
+	if ((coord1.y_bis < 0 && coord2.y_bis < 0) || \
+	(coord1.y_bis > HEIGHT && coord2.y_bis > HEIGHT))
+		return (1);
+	else if ((coord1.x_bis < 0 && coord2.x_bis < 0) || \
+	(coord1.x_bis > LENGTH && coord2.x_bis > LENGTH))
+		return (1);
+	return (0);
 }
 
 static float	highest(float dx, float dy)
