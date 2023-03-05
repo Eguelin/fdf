@@ -6,7 +6,7 @@
 /*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/04 15:44:13 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 19:18:11 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 		data->map[i].x = (x - (((float)data->x_max +1) / 2));
 		data->map[i].y = (y - (((float)data->y_max +1) / 2));
 		data->map[i].z = ft_atoi(word[x - 1]);
-		data->map[i].color.code = ft_import_color(word[x - 1]);
-		x++;
-		i++;
+		if (data->z_min > data->map[i].z)
+			data->z_min = data->map[i].z;
+		if (data->z_max < data->map[i].z)
+			data->z_max = data->map[i].z;
+		data->map[i++].color.code = ft_import_color(word[x++ - 1]);
 	}
 	return (free(line), ft_free_split(word), 0);
 }

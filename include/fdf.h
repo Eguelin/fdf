@@ -6,7 +6,7 @@
 /*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/04 17:41:37 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 19:03:43 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ typedef struct s_data
 	t_coord	*map;
 	int		x_max;
 	int		y_max;
+	int		z_min;
+	int		z_max;
 	float	intensity;
 	float	mid_height;
 	float	mid_length;
