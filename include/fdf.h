@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/04 19:03:43 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 16:17:13 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,21 +134,22 @@ typedef struct s_coordinates
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_img	img;
-	t_coord	*map;
-	int		x_max;
-	int		y_max;
-	int		z_min;
-	int		z_max;
-	float	intensity;
-	float	mid_height;
-	float	mid_length;
-	float	a;
-	float	b;
-	float	c;
-	float	zoom;
+	void		*mlx;
+	void		*mlx_win;
+	t_img		img;
+	t_coord		*map;
+	const char	*path;
+	int			x_max;
+	int			y_max;
+	int			z_min;
+	int			z_max;
+	float		intensity;
+	float		mid_height;
+	float		mid_length;
+	float		a;
+	float		b;
+	float		c;
+	float		zoom;
 }				t_data;
 
 void	ft_init_fdf(t_data *data, const char *arg);
@@ -158,6 +159,7 @@ void	ft_isometric(t_data *data);
 void	ft_revers_isometric(t_data *data);
 void	ft_front(t_data *data);
 void	ft_above(t_data *data);
+void	ft_change_color(t_data *data, int i);
 
 int		ft_image(t_data *data);
 int		ft_close(t_data *data);

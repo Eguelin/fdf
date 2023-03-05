@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:09:49 by emilien           #+#    #+#             */
-/*   Updated: 2023/03/04 21:36:45 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 15:32:08 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	ft_color_palette1(t_data *data, int i);
+static void	ft_color_palette2(t_data *data, int i);
+static void	ft_color_palette3(t_data *data, int i);
 
 int	ft_gradient_color(t_color *clr1, t_color *clr2, float line, int i)
 {
@@ -24,16 +28,102 @@ int	ft_gradient_color(t_color *clr1, t_color *clr2, float line, int i)
 	return (clr3.code);
 }
 
-/*void	ft_change_color(t_data *data)
+void	ft_change_color(t_data *data, int i)
 {
-	int	i;
-	int	i_max;
+	int	j;
+	int	j_max;
 
-	i = 0;
-	i_max  = data->x_max * data->y_max;
-	while (i < i_max)
+	j = 0;
+	j_max = data->x_max * data->y_max;
+	while (j < j_max)
 	{
-		data->map[i].color.code =	0;
-		i++;
+		if (i == 0)
+			ft_color_palette1(data, j);
+		else if (i == 1)
+			ft_color_palette2(data, j);
+		else
+			ft_color_palette3(data, j);
+		j++;
 	}
-}*/
+}
+
+static void	ft_color_palette1(t_data *data, int i)
+{
+	float	percent;
+
+	percent = (data->map[i].z - data->z_min) / (data->z_max - data->z_min);
+	if (percent <= 0.1f)
+		data->map[i].color.code = 0xff0000;
+	else if (percent <= 0.2f)
+		data->map[i].color.code = 0xffa200;
+	else if (percent <= 0.3f)
+		data->map[i].color.code = 0xfff000;
+	else if (percent <= 0.4f)
+		data->map[i].color.code = 0x58ff00;
+	else if (percent <= 0.5f)
+		data->map[i].color.code = 0x00ff00;
+	else if (percent <= 0.6f)
+		data->map[i].color.code = 0x00ffea;
+	else if (percent <= 0.7f)
+		data->map[i].color.code = 0x00beff;
+	else if (percent <= 0.8f)
+		data->map[i].color.code = 0x0000ff;
+	else if (percent <= 0.9f)
+		data->map[i].color.code = 0x9500ff;
+	else
+		data->map[i].color.code = 0xff00f0;
+}
+
+static void	ft_color_palette2(t_data *data, int i)
+{
+	float	percent;
+
+	percent = (data->map[i].z - data->z_min) / (data->z_max - data->z_min);
+	if (percent <= 0.1f)
+		data->map[i].color.code = 0xff00f0;
+	else if (percent <= 0.2f)
+		data->map[i].color.code = 0x9500ff;
+	else if (percent <= 0.3f)
+		data->map[i].color.code = 0x0000ff;
+	else if (percent <= 0.4f)
+		data->map[i].color.code = 0x00beff;
+	else if (percent <= 0.5f)
+		data->map[i].color.code = 0x00ffea;
+	else if (percent <= 0.6f)
+		data->map[i].color.code = 0x00ff00;
+	else if (percent <= 0.7f)
+		data->map[i].color.code = 0x58ff00;
+	else if (percent <= 0.8f)
+		data->map[i].color.code = 0xfff000;
+	else if (percent <= 0.9f)
+		data->map[i].color.code = 0xffa200;
+	else
+		data->map[i].color.code = 0xff0000;
+}
+
+static void	ft_color_palette3(t_data *data, int i)
+{
+	float	percent;
+
+	percent = (data->map[i].z - data->z_min) / (data->z_max - data->z_min);
+	if (percent <= 0.1f)
+		data->map[i].color.code = 0xff0000;
+	else if (percent <= 0.2f)
+		data->map[i].color.code = 0xffa200;
+	else if (percent <= 0.3f)
+		data->map[i].color.code = 0xfff000;
+	else if (percent <= 0.4f)
+		data->map[i].color.code = 0x58ff00;
+	else if (percent <= 0.5f)
+		data->map[i].color.code = 0x00ff00;
+	else if (percent <= 0.6f)
+		data->map[i].color.code = 0x00ffea;
+	else if (percent <= 0.7f)
+		data->map[i].color.code = 0x00beff;
+	else if (percent <= 0.8f)
+		data->map[i].color.code = 0x0000ff;
+	else if (percent <= 0.9f)
+		data->map[i].color.code = 0x9500ff;
+	else
+		data->map[i].color.code = 0xff00f0;
+}
