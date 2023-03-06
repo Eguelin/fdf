@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
+/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:59:50 by emilienguel       #+#    #+#             */
-/*   Updated: 2023/03/06 19:10:02 by emilienguel      ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 20:27:48 by emilien          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
