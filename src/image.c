@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/05 15:17:05 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 19:09:09 by emilienguel      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_image(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
+	ft_rgb(data);
 	return (0);
 }
 

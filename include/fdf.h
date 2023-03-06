@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/05 16:17:13 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 19:10:11 by emilienguel      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_trgb
 
 typedef union u_color
 {
-	t_trgb	argb;
+	t_trgb	trgb;
 	int		code;
 }			t_color;
 
@@ -143,6 +143,7 @@ typedef struct s_data
 	int			y_max;
 	int			z_min;
 	int			z_max;
+	int			rgb_on_off;
 	float		intensity;
 	float		mid_height;
 	float		mid_length;
@@ -160,6 +161,7 @@ void	ft_revers_isometric(t_data *data);
 void	ft_front(t_data *data);
 void	ft_above(t_data *data);
 void	ft_change_color(t_data *data, int i);
+void	ft_rgb(t_data *data);
 
 int		ft_image(t_data *data);
 int		ft_close(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/05 12:29:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 18:55:57 by emilienguel      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

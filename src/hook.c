@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:20:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/05 16:23:36 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 19:12:11 by emilienguel      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	key_hook2(int keycode, t_data *data);
 static void	key_hook3(int keycode, t_data *data);
+static void	key_hook4(int keycode, t_data *data);
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -89,6 +90,19 @@ static void	key_hook3(int keycode, t_data *data)
 		ft_change_color(data, 1);
 	else if (keycode == KEY_7)
 		ft_change_color(data, 2);
+	else
+		key_hook4(keycode, data);
+}
+
+static void	key_hook4(int keycode, t_data *data)
+{
+	if (keycode == KEY_0)
+	{
+		if (data->rgb_on_off)
+			data->rgb_on_off = 0;
+		else
+			data->rgb_on_off = 1;
+	}
 }
 
 int	mouse_hook(int button, int x, int y, t_data *data)
