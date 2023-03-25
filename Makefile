@@ -6,18 +6,18 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/03/05 16:20:05 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/03/25 17:08:35 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 #Standard
-OUT_DIR	= build
-SRC_DIR	= src
-INC_DIR	= include
-LIB_DIR	= lib
+OUT_DIR	= build/
+SRC_DIR	= src/
+INC_DIR	= include/
+LIB_DIR	= lib/
 NAME	= fdf
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR)/ -fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR) -O3 -fsanitize=address -g3
 MLX		= -Lmlx_linux -lmlx_Linux -L ./lib/minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -38,9 +38,17 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
-OBJS		= $(shell find $(SRC_DIR) -type f | awk -F "." '$$NF=="c" {print $$(NF - 1) ".o"}' | awk -F "$(SRC_DIR)" '{print "$(OUT_DIR)"$$NF}')
-HEADERS		= $(shell find $(INC_DIR) -type f | awk -F "." '$$NF=="h" {print $$0}')
-LIB			= $(shell find $(LIB_DIR)/mylib -type f | awk -F "." '$$NF=="a" {print $$0}')
+ALL_FILES = camera.c color.c hook.c image.c main.c parsing.c projection.c rgb.c tool.c
+
+MYLIB_DIR = mylib/
+FILES_MYLIB = mylib.a
+LIB_FILES = $(addprefix $(MYLIB_DIR), $(FILES_MYLIB))
+
+INC_FILES	= fdf.h
+
+OBJS		= $(addprefix $(OUT_DIR), $(ALL_FILES:.c=.o))
+HEADERS		= $(addprefix $(INC_DIR), $(INC_FILES))
+LIB			= $(addprefix $(LIB_DIR), $(LIB_FILES))
 
 #Rules
 .PHONY: all
@@ -48,35 +56,38 @@ all: $(NAME)
 
 $(NAME): $(OUT_DIR) $(OBJS) | lib
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $(NAME)
-	echo $(COMP_MSG)
-	norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
-	norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@echo $(COMP_MSG)
+	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(OUT_DIR)/%.o : $(SRC_DIR)/%.c $(HEADERS) Makefile
+$(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	$(MAKE) clean -sC ./lib/minilibx-linux
-	$(MAKE) clean -sC ./lib/mylib
+	$(MAKE) clean -C ./lib/minilibx-linux
+	$(MAKE) clean -C ./lib/mylib
 	$(RM) $(OUT_DIR)
-	echo $(CLEAN_MSG)
+	@echo $(CLEAN_MSG)
 
 .PHONY: fclean
-fclean: clean
-	$(MAKE) fclean -sC ./lib/mylib
-	$(RM) $(NAME)
-	echo $(FULL_CLEAN_MSG)
+fclean:
+	$(MAKE) clean -C ./lib/minilibx-linux
+	$(MAKE) fclean -C ./lib/mylib
+	$(RM) $(NAME) $(OUT_DIR)
+	@echo $(CLEAN_MSG)
+	@echo $(FULL_CLEAN_MSG)
 
 .PHONY: re
 re: fclean all
 
 .PHONY: lib
 lib:
-	$(MAKE) -sC ./lib/minilibx-linux
-	$(MAKE) -sC ./lib/mylib
+	$(MAKE) -C ./lib/minilibx-linux
+	$(MAKE) -C ./lib/mylib
 
 $(OUT_DIR):
-	mkdir -p $(shell find $(SRC_DIR) -type d | awk -F "$(SRC_DIR)" '$$NF!="$(SRC_DIR)" {print "$(OUT_DIR)"$$(NF)}')
+	mkdir -p $(shell find $(SRC_DIR) -type d | awk -F "$(SRC_DIR)" '{print "$(OUT_DIR)"$$(NF)}')
 
-.SILENT:
+.PHONY: all clean fclean re
+#.SILENT:
