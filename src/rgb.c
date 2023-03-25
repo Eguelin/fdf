@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:59:50 by emilienguel       #+#    #+#             */
-/*   Updated: 2023/03/06 20:27:48 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 17:15:48 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ static void	ft_rgb2(t_trgb *trgb);
 void	ft_rgb(t_data *data)
 {
 	int	i;
+	int	j;
 	int	i_max;
 
 	i = 0;
 	i_max = data->x_max * data->y_max;
 	while (i < i_max && data->rgb_on_off)
 	{
-		ft_rgb2(&data->map[i].color.trgb);
+		j = 10;
+		while (j)
+		{
+			ft_rgb2(&data->map[i].color.trgb);
+			j--;
+		}
 		i++;
 	}
 }

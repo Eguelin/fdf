@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:20:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/06 19:12:11 by emilienguel      ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 17:41:03 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ static void	key_hook2(int keycode, t_data *data)
 	else if (keycode == KEY_DASH_UNDERSCORE && data->zoom > 0.05)
 		data->zoom *= 0.9;
 	else if (keycode == KEY_UP_ARROW && data->mid_height > -2000000)
-		data->mid_height -= data->zoom / 10;
+		data->mid_height -= 20;
 	else if (keycode == KEY_DOWN_ARROW && data->mid_height < 2000000)
-		data->mid_height += data->zoom / 10;
+		data->mid_height += 20;
 	else if (keycode == KEY_LEFT_ARROW && data->mid_height > -2000000)
-		data->mid_length -= data->zoom / 10;
+		data->mid_length -= 20;
 	else if (keycode == KEY_RIGHT_ARROW && data->mid_height < 2000000)
-		data->mid_length += data->zoom / 10;
+		data->mid_length += 20;
 	else if (keycode == KEY_CLOSE_BRACKET && data->intensity == 0)
 		data->intensity = 0.0001;
 	else if (keycode == KEY_CLOSE_BRACKET && data->intensity < 1)
@@ -72,7 +72,7 @@ static void	key_hook3(int keycode, t_data *data)
 	if (keycode == KEY_1)
 		ft_isometric(data);
 	else if (keycode == KEY_2)
-		ft_revers_isometric(data);
+		ft_parallel(data);
 	else if (keycode == KEY_3)
 		ft_above(data);
 	else if (keycode == KEY_4)
@@ -96,12 +96,23 @@ static void	key_hook3(int keycode, t_data *data)
 
 static void	key_hook4(int keycode, t_data *data)
 {
-	if (keycode == KEY_0)
+	if (keycode == KEY_9)
 	{
 		if (data->rgb_on_off)
 			data->rgb_on_off = 0;
 		else
 			data->rgb_on_off = 1;
+	}
+	else if (keycode == KEY_0)
+	{
+		data->rgb_on_off = 0;
+		free(data->map);
+		data->x_max = 0;
+		data->y_max = 0;
+		data->z_max = INT32_MIN;
+		data->z_min = INT32_MAX;
+		ft_import_map(data->path, data);
+		ft_isometric(data);
 	}
 }
 
@@ -113,16 +124,16 @@ int	mouse_hook(int button, int x, int y, t_data *data)
 		data->mid_height = y;
 	}
 	else if (button == 2)
-		ft_isometric(data);
+		key_hook(KEY_0, data);
 	else if (button == 3)
 	{
 		data->mid_height = HEIGHT / 2;
 		data->mid_length = LENGTH / 2;
 	}
-	else if (button == 4 && data->zoom < 19000)
-		data->zoom *= 1.1;
-	else if (button == 5 && data->zoom > 0.05)
-		data->zoom *= 0.9;
+	else if (button == 4)
+		key_hook(KEY_EQUALS_PLUS, data);
+	else if (button == 5)
+		key_hook(KEY_DASH_UNDERSCORE, data);
 	ft_projection(data);
 	return (0);
 }
