@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/22 14:46:20 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 17:55:15 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ typedef struct s_image
 
 typedef struct s_coordinates
 {
-	float	x;
-	float	y;
-	float	z;
-	float	x_bis;
-	float	y_bis;
-	float	z_bis;
+	double	x;
+	double	y;
+	double	z;
+	double	x_bis;
+	double	y_bis;
+	double	z_bis;
 	t_color	color;
 }				t_coord;
 
@@ -144,13 +144,13 @@ typedef struct s_data
 	int			z_min;
 	int			z_max;
 	int			rgb_on_off;
-	float		intensity;
-	float		mid_height;
-	float		mid_length;
-	float		a;
-	float		b;
-	float		c;
-	float		zoom;
+	double		intensity;
+	double		mid_height;
+	double		mid_length;
+	double		a;
+	double		b;
+	double		c;
+	double		zoom;
 }				t_data;
 
 void	ft_init_fdf(t_data *data, const char *arg);
@@ -168,6 +168,6 @@ int		ft_close(t_data *data);
 int		ft_exit(t_data *data);
 int		key_hook(int keycode, t_data *data);
 int		mouse_hook(int button, int x, int y, t_data *data);
-int		ft_gradient_color(t_color *clr1, t_color *clr2, float line, int i);
+int		ft_gradient_color(t_color *clr1, t_color *clr2, double line, int i);
 
 #endif

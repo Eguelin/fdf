@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilienguelin <emilienguelin@student.42    +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/06 19:09:09 by emilienguel      ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 17:55:37 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 static void		ft_draw_line(t_data *data, t_coord coord1, t_coord coord2);
 static int		ft_in_screen(t_coord coord1, t_coord coord2);
-static float	highest(float dx, float dy);
+static double	highest(double dx, double dy);
 static void		ft_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 int	ft_image(t_data *data)
 {
 	int		i;
-	float	x_max;
-	float	y_max;
+	double	x_max;
+	double	y_max;
 
 	i = 0;
-	x_max = -0.5 + (float)data->x_max / 2;
-	y_max = -0.5 + (float)data->y_max / 2;
+	x_max = -0.5 + (double)data->x_max / 2;
+	y_max = -0.5 + (double)data->y_max / 2;
 	data->img.img = mlx_new_image(data->mlx, LENGTH, HEIGHT);
 	if (!data->img.img)
 		ft_exit(data);
@@ -47,9 +47,9 @@ int	ft_image(t_data *data)
 
 static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 {
-	float	dx;
-	float	dy;
-	float	dmax;
+	double	dx;
+	double	dy;
+	double	dmax;
 	int		i;
 
 	if (ft_in_screen(coord1, coord2))
@@ -83,7 +83,7 @@ static int	ft_in_screen(t_coord coord1, t_coord coord2)
 	return (0);
 }
 
-static float	highest(float dx, float dy)
+static double	highest(double dx, double dy)
 {
 	if (dx < 0)
 		dx *= -1;

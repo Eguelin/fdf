@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emilien <emilien@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:09:49 by emilien           #+#    #+#             */
-/*   Updated: 2023/03/06 20:17:11 by emilien          ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 17:55:30 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_color_palette1(t_data *data, int i);
 static void	ft_color_palette2(t_data *data, int i);
 
-int	ft_gradient_color(t_color *clr1, t_color *clr2, float line, int i)
+int	ft_gradient_color(t_color *clr1, t_color *clr2, double line, int i)
 {
 	t_color	clr3;
 
@@ -46,7 +46,7 @@ void	ft_change_color(t_data *data, int i)
 
 static void	ft_color_palette1(t_data *data, int i)
 {
-	float	percent;
+	double	percent;
 
 	percent = (data->map[i].z - data->z_min) / (data->z_max - data->z_min);
 	if (percent <= 0.09f)
@@ -75,7 +75,7 @@ static void	ft_color_palette1(t_data *data, int i)
 
 static void	ft_color_palette2(t_data *data, int i)
 {
-	float	percent;
+	double	percent;
 
 	percent = (data->map[i].z - data->z_min) / (data->z_max - data->z_min);
 	if (percent <= 0.09f)

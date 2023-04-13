@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:20:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:41:03 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 18:05:44 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	key_hook4(int keycode, t_data *data);
 
 int	key_hook(int keycode, t_data *data)
 {
-	float	one_degree;
+	double	one_degree;
 
 	one_degree = PI / 180;
 	if (keycode == KEY_ESC)
@@ -57,7 +57,7 @@ static void	key_hook2(int keycode, t_data *data)
 		data->mid_length += 20;
 	else if (keycode == KEY_CLOSE_BRACKET && data->intensity == 0)
 		data->intensity = 0.0001;
-	else if (keycode == KEY_CLOSE_BRACKET && data->intensity < 1)
+	else if (keycode == KEY_CLOSE_BRACKET && data->intensity < 10)
 		data->intensity *= 1.1;
 	else if (keycode == KEY_OPEN_BRACKET && data->intensity > 0.0001)
 		data->intensity *= 0.9;

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:37:26 by eguelin           #+#    #+#             */
-/*   Updated: 2023/03/22 14:45:09 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 18:01:31 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_isometric(t_data *data)
 	data->a = PI / 4;
 	data->b = PI / 180 * -35;
 	data->c = PI / 6;
-	data->intensity = 0.1;
+	data->intensity = 1;
 	data->zoom = 2200 / data->x_max;
 }
 
