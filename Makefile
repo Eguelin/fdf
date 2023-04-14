@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/03/25 17:08:35 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/04/14 18:40:47 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INC_DIR	= include/
 LIB_DIR	= lib/
 NAME	= fdf
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR) -O3 -fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra -I $(INC_DIR) -O3 #-fsanitize=address -g3
 MLX		= -Lmlx_linux -lmlx_Linux -L ./lib/minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -50,44 +50,58 @@ OBJS		= $(addprefix $(OUT_DIR), $(ALL_FILES:.c=.o))
 HEADERS		= $(addprefix $(INC_DIR), $(INC_FILES))
 LIB			= $(addprefix $(LIB_DIR), $(LIB_FILES))
 
+#Sources bonus
+BNS_DIR	= bonus/
+BNS_FILES	= camera_bonus.c color_bonus.c hook_bonus.c image_bonus.c main_bonus.c parsing_bonus.c projection_bonus.c rgb_bonus.c tool_bonus.c
+ALL_BNS_FILES	= $(addprefix $(BNS_DIR), $(BNS_FILES))
+
+BNS_INC_FILES	= fdf_bonus.h
+
+BNS_OBJS	= $(addprefix $(OUT_DIR), $(ALL_BNS_FILES:.c=.o))
+BNS_HEADERS	= $(addprefix $(INC_DIR), $(BNS_INC_FILES))
+
 #Rules
-.PHONY: all
 all: $(NAME)
 
-$(NAME): $(OUT_DIR) $(OBJS) | lib
+$(NAME): $(OUT_DIR) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $(NAME)
 	@echo $(COMP_MSG)
 	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
+$(OUT_DIR)%.o : $(SRC_DIR)%.c Makefile $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean
+bonus: $(OUT_DIR) $(BNS_OBJS) $(LIB)
+	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIB) $(MLX) -o $(NAME)
+	@echo $(COMP_BNS_MSG)
+	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+
+$(OUT_DIR)%.o : $(SRC_DIR)%.c Makefile $(BNS_HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	$(MAKE) clean -C ./lib/minilibx-linux
 	$(MAKE) clean -C ./lib/mylib
 	$(RM) $(OUT_DIR)
 	@echo $(CLEAN_MSG)
 
-.PHONY: fclean
 fclean:
-	$(MAKE) clean -C ./lib/minilibx-linux
 	$(MAKE) fclean -C ./lib/mylib
 	$(RM) $(NAME) $(OUT_DIR)
 	@echo $(CLEAN_MSG)
 	@echo $(FULL_CLEAN_MSG)
 
-.PHONY: re
+force:
+
+$(LIB): force
+	$(MAKE) -C ./lib/mylib
+	$(MAKE) -C ./lib/minilibx-linux
+
+$(OUT_DIR): force
+	mkdir -p $(shell find $(SRC_DIR) -type d | awk -F "$(SRC_DIR)" '$$NF!="$(SRC_DIR)" {print "$(OUT_DIR)"$$(NF)}')
+
 re: fclean all
 
-.PHONY: lib
-lib:
-	$(MAKE) -C ./lib/minilibx-linux
-	$(MAKE) -C ./lib/mylib
-
-$(OUT_DIR):
-	mkdir -p $(shell find $(SRC_DIR) -type d | awk -F "$(SRC_DIR)" '{print "$(OUT_DIR)"$$(NF)}')
-
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean force re
 #.SILENT:
