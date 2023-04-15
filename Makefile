@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/04/14 18:40:47 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/04/15 19:35:31 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ CLEAN_MSG		= "$(RED)Cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-
 FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shell date +'%Y-%m-%d %H:%M:%S')$(WHITE)"
 
 #Sources
-ALL_FILES = camera.c color.c hook.c image.c main.c parsing.c projection.c rgb.c tool.c
+ALL_FILES = image.c main.c parsing.c projection.c tool.c
 
 MYLIB_DIR = mylib/
 FILES_MYLIB = mylib.a

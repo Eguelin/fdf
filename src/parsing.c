@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/13 17:55:43 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/15 19:31:42 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void			ft_size_file(const char *path, t_data *data);
 static int			ft_import_coord(int fd, int y, t_data *data);
-static unsigned	int	ft_import_color(char *word);
 
 void	ft_import_map(const char *path, t_data *data)
 {
@@ -91,31 +90,8 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 		data->map[i].x = (x - (((double)data->x_max +1) / 2));
 		data->map[i].y = (y - (((double)data->y_max +1) / 2));
 		data->map[i].z = ft_atoi(word[x - 1]);
-		if (data->z_min > data->map[i].z)
-			data->z_min = data->map[i].z;
-		if (data->z_max < data->map[i].z)
-			data->z_max = data->map[i].z;
-		data->map[i++].color.code = ft_import_color(word[x++ - 1]);
+		x++;
+		i++;
 	}
 	return (free(line), ft_free_split(word), 0);
-}
-
-static unsigned	int	ft_import_color(char *word)
-{
-	int	i;
-
-	i = 0;
-	while (word[i])
-	{
-		word[i] = ft_tolower(word[i]);
-		i++;
-	}
-	i = 0;
-	while (word[i])
-	{
-		if (word[i] == 'x')
-			return (ft_atoi_base(word + i + 1, "0123456789abcdef"));
-		i++;
-	}
-	return (0xFFFFFFFF);
 }

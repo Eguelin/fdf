@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/13 17:55:37 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/15 19:44:28 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	ft_image(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
-	ft_rgb(data);
 	return (0);
 }
 
@@ -65,7 +64,7 @@ static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 		if (!(coord1.x_bis < 0 || coord1.x_bis > LENGTH || \
 		coord1.y_bis < 0 || coord1.y_bis > HEIGHT))
 			ft_mlx_pixel_put(&data->img, coord1.x_bis, coord1.y_bis, \
-			ft_gradient_color(&coord1.color, &coord2.color, dmax, i));
+			0xFFFFFFFF);
 		coord1.x_bis += dx;
 		coord1.y_bis += dy;
 		i++;
