@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/16 13:03:07 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 19:24:44 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,20 @@ typedef struct s_coordinates
 	t_color	color;
 }				t_coord;
 
+typedef struct s_header
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*ptr;
+}				t_header;
+
 typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
 	t_img		img;
 	t_coord		*map;
+	t_header	header;
 	const char	*path;
 	int			x_max;
 	int			y_max;
@@ -165,6 +173,7 @@ void	ft_above(t_data *data);
 void	ft_change_color(t_data *data, int i);
 void	ft_rgb(t_data *data);
 
+int		ft_close_header(t_data *data);
 int		ft_image(t_data *data);
 int		ft_close(t_data *data);
 int		ft_exit(t_data *data);

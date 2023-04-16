@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/15 19:31:42 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 18:18:41 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	ft_import_map(const char *path, t_data *data)
 		exit(1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
+	{
+		free(data->map);
 		exit(1);
+	}
 	while (y <= data->y_max)
 	{
 		if (ft_import_coord(fd, y, data))
