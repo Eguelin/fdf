@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/15 19:44:28 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 19:42:51 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		ft_draw_line(t_data *data, t_coord coord1, t_coord coord2);
 static int		ft_in_screen(t_coord coord1, t_coord coord2);
-static double	highest(double dx, double dy);
+static double	ft_highest(double dx, double dy);
 static void		ft_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 int	ft_image(t_data *data)
@@ -56,7 +56,7 @@ static void	ft_draw_line(t_data *data, t_coord coord1, t_coord coord2)
 	i = 0;
 	dx = coord2.x_bis - coord1.x_bis;
 	dy = coord2.y_bis - coord1.y_bis;
-	dmax = highest(dx, dy);
+	dmax = ft_highest(dx, dy);
 	dx /= dmax;
 	dy /= dmax;
 	while (dmax > i)
@@ -82,7 +82,7 @@ static int	ft_in_screen(t_coord coord1, t_coord coord2)
 	return (0);
 }
 
-static double	highest(double dx, double dy)
+static double	ft_highest(double dx, double dy)
 {
 	if (dx < 0)
 		dx *= -1;
