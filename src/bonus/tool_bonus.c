@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:21:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/14 18:43:43 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 13:02:32 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_init_fdf(t_data *data, const char *path)
 {
 	data->x_max = 0;
 	data->y_max = 0;
-	data->z_max = INT32_MIN;
-	data->z_min = INT32_MAX;
+	data->z_max = INT_MIN;
+	data->z_min = INT_MAX;
 	data->rgb_on_off = 0;
 	data->path = path;
 	ft_import_map(data->path, data);

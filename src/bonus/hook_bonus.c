@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:20:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/14 18:42:47 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 13:02:07 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static void	key_hook3(int keycode, t_data *data)
 		free(data->map);
 		data->x_max = 0;
 		data->y_max = 0;
-		data->z_max = INT32_MIN;
-		data->z_min = INT32_MAX;
+		data->z_max = INT_MIN;
+		data->z_min = INT_MAX;
 		ft_import_map(data->path, data);
 	}
 	else if (keycode == KEY_6)
@@ -109,8 +109,8 @@ static void	key_hook4(int keycode, t_data *data)
 		free(data->map);
 		data->x_max = 0;
 		data->y_max = 0;
-		data->z_max = INT32_MIN;
-		data->z_min = INT32_MAX;
+		data->z_max = INT_MIN;
+		data->z_min = INT_MAX;
 		ft_import_map(data->path, data);
 		ft_isometric(data);
 	}

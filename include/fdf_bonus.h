@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/14 18:37:33 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 13:03:07 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define PI 3.141592653589793
 # define HEIGHT 2058
 # define LENGTH 3840
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 # define KEY_ESC 65307
 # define KEY_F1 65470
