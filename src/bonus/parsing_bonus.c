@@ -6,14 +6,15 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:40:17 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/17 13:02:53 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 14:50:23 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
 static void			ft_size_file(const char *path, t_data *data);
-static int			ft_import_coord(int fd, int y, t_data *data);
+static int			ft_import_line(int fd, int y, t_data *data);
+static int			ft_import_coord(int y, char **word, t_data *data);
 static unsigned	int	ft_import_color(char *word);
 
 void	ft_import_map(const char *path, t_data *data)
@@ -34,7 +35,7 @@ void	ft_import_map(const char *path, t_data *data)
 	}
 	while (y <= data->y_max)
 	{
-		if (ft_import_coord(fd, y, data))
+		if (ft_import_line(fd, y, data))
 		{
 			close(fd);
 			free(data->map);
@@ -74,10 +75,8 @@ static void	ft_size_file(const char *path, t_data *data)
 	close(fd);
 }
 
-static int	ft_import_coord(int fd, int y, t_data *data)
+static int	ft_import_line(int fd, int y, t_data *data)
 {
-	int		i;
-	int		x;
 	char	*line;
 	char	**word;
 
@@ -87,10 +86,22 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 	word = ft_split(line, ' ');
 	if (!word)
 		return (free(line), 1);
+	if (ft_import_coord(y, word, data))
+		return (free(line), ft_free_split(word), 1);
+	return (free(line), ft_free_split(word), 0);
+}
+
+static int	ft_import_coord(int y, char **word, t_data *data)
+{
+	int		i;
+	int		x;
+
 	x = 1;
 	i = (y - 1) * data->x_max;
 	while (x <= data->x_max)
 	{
+		if (!word[x - 1])
+			return (1);
 		data->map[i].x = (x - (((double)data->x_max +1) * 0.5));
 		data->map[i].y = (y - (((double)data->y_max +1) * 0.5));
 		data->map[i].z = ft_atoi(word[x - 1]);
@@ -98,9 +109,11 @@ static int	ft_import_coord(int fd, int y, t_data *data)
 			data->z_min = data->map[i].z;
 		if (data->z_max < data->map[i].z)
 			data->z_max = data->map[i].z;
-		data->map[i++].color.code = ft_import_color(word[x++ - 1]);
+		data->map[i].color.code = ft_import_color(word[x - 1]);
+		i++;
+		x++;
 	}
-	return (free(line), ft_free_split(word), 0);
+	return (0);
 }
 
 static unsigned	int	ft_import_color(char *word)
