@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:21:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/17 12:54:50 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 16:31:09 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	ft_header(t_data *data)
 	data->header.mlx_win = mlx_new_window(data->mlx, 540, 1920, "Header");
 	if (!data->header.mlx_win)
 		ft_exit(data);
-	data->header.ptr = mlx_xpm_file_to_image(data->mlx, "image/Header_fdf.xpm", \
-	&w, &h);
+	data->header.ptr = mlx_xpm_file_to_image(data->mlx, \
+	"image/header_bonus.xpm", &w, &h);
 	if (!data->header.ptr)
 		ft_exit(data);
 	mlx_put_image_to_window(data->mlx, data->header.mlx_win, data->header.ptr, \
