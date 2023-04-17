@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/17 16:03:24 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 16:13:14 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ int		mouse_hook(int button, int x, int y, t_data *data);
 
 ////////// [ image_bonus.c ] //////////
 int		ft_image(t_data *data);
-
-////////// [ main_bonus.c ] //////////
 
 ////////// [ parsing_bonus.c ] //////////
 void	ft_import_map(const char *path, t_data *data);
