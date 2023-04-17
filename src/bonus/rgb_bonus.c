@@ -6,13 +6,13 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:59:50 by emilienguel       #+#    #+#             */
-/*   Updated: 2023/04/14 18:43:26 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 12:59:02 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-static void	ft_rgb2(t_trgb *trgb);
+static void	ft_rgb_2(t_trgb *trgb);
 
 void	ft_rgb(t_data *data)
 {
@@ -27,14 +27,14 @@ void	ft_rgb(t_data *data)
 		j = 10;
 		while (j)
 		{
-			ft_rgb2(&data->map[i].color.trgb);
+			ft_rgb_2(&data->map[i].color.trgb);
 			j--;
 		}
 		i++;
 	}
 }
 
-static void	ft_rgb2(t_trgb *trgb)
+static void	ft_rgb_2(t_trgb *trgb)
 {
 	if (trgb->r == 0xff && trgb->g < 0xff && trgb->b == 0)
 		trgb->g++;

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:21:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/16 18:22:21 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 13:14:20 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_init_fdf(t_data *data, const char *path)
 	data->y_max = 0;
 	data->path = path;
 	ft_import_map(data->path, data);
-	data->mid_height = HEIGHT / 2;
-	data->mid_length = LENGTH / 2;
+	data->mid_height = HEIGHT * 0.6;
+	data->mid_length = LENGTH * 0.5;
 	data->zoom = 1500 / data->x_max;
 	data->mlx = mlx_init();
 	if (!data->mlx)

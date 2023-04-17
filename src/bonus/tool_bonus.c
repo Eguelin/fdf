@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:21:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/16 19:41:06 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 12:54:50 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,9 @@ static void	ft_header(t_data *data)
 	mlx_destroy_image(data->mlx, data->header.ptr);
 }
 
-int	ft_close_header(t_data *data)
-{
-	mlx_destroy_window(data->mlx, data->header.mlx_win);
-	data->header.mlx_win = NULL;
-	return (0);
-}
-
 int	ft_close(t_data *data)
 {
-	if (data->header.mlx_win)
-		mlx_destroy_window(data->mlx, data->header.mlx_win);
+	mlx_destroy_window(data->mlx, data->header.mlx_win);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);

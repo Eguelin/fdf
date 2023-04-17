@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:20:30 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/16 13:02:07 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 13:02:34 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int	mouse_hook(int button, int x, int y, t_data *data)
 		key_hook(KEY_0, data);
 	else if (button == 3)
 	{
-		data->mid_height = HEIGHT / 2;
-		data->mid_length = LENGTH / 2;
+		data->mid_height = HEIGHT * 0.5;
+		data->mid_length = LENGTH * 0.5;
 	}
 	else if (button == 4)
 		key_hook(KEY_EQUALS_PLUS, data);

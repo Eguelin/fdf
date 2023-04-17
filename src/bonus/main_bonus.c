@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/16 19:37:04 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 12:55:50 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char const *argv[])
 	mlx_hook(data.mlx_win, 17, 0, ft_close, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
 	mlx_hook(data.mlx_win, 4, 1L << 2, mouse_hook, &data);
-	mlx_hook(data.header.mlx_win, 17, 0, ft_close_header, &data);
 	mlx_hook(data.header.mlx_win, 2, 1L << 0, key_hook, &data);
 	mlx_hook(data.header.mlx_win, 4, 1L << 2, mouse_hook, &data);
 	mlx_loop_hook(data.mlx, ft_image, &data);

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:32:01 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/15 19:44:38 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 13:08:39 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static void	ft_matrix_rotation_x(double matrix[3][3])
 	matrix[0][1] = 0;
 	matrix[0][2] = 0;
 	matrix[1][0] = 0;
-	matrix[1][1] = cos(PI / 4);
-	matrix[1][2] = -sin(PI / 4);
+	matrix[1][1] = cos(PI * 0.25);
+	matrix[1][2] = -sin(PI * 0.25);
 	matrix[2][0] = 0;
-	matrix[2][1] = sin(PI / 4);
-	matrix[2][2] = cos(PI / 4);
+	matrix[2][1] = sin(PI * 0.25);
+	matrix[2][2] = cos(PI * 0.25);
 }
 
 static void	ft_matrix_rotation_y(double matrix[3][3])

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:53:28 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/16 19:42:51 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 13:07:48 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_image(t_data *data)
 	double	y_max;
 
 	i = 0;
-	x_max = -0.5 + (double)data->x_max / 2;
-	y_max = -0.5 + (double)data->y_max / 2;
+	x_max = -0.5 + (double)data->x_max * 0.5;
+	y_max = -0.5 + (double)data->y_max * 0.5;
 	data->img.img = mlx_new_image(data->mlx, LENGTH, HEIGHT);
 	if (!data->img.img)
 		ft_exit(data);
