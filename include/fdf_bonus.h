@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/04/17 13:21:05 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 16:03:24 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,37 @@ typedef struct s_data
 	double		zoom;
 }				t_data;
 
-void	ft_init_fdf(t_data *data, const char *arg);
-void	ft_import_map(const char *path, t_data *data);
-void	ft_projection(t_data *data);
+////////// [ camera_bonus.c ] //////////
 void	ft_isometric(t_data *data);
 void	ft_parallel(t_data *data);
 void	ft_front(t_data *data);
 void	ft_above(t_data *data);
-void	ft_change_color(t_data *data, int i);
-void	ft_rgb(t_data *data);
 
-int		ft_close_header(t_data *data);
-int		ft_image(t_data *data);
-int		ft_close(t_data *data);
-int		ft_exit(t_data *data);
+////////// [ color_bonus.c ] //////////
+int		ft_gradient_color(t_color *clr1, t_color *clr2, double line, int i);
+void	ft_change_color(t_data *data, int i);
+
+////////// [ hook_bonus.c ] //////////
 int		key_hook(int keycode, t_data *data);
 int		mouse_hook(int button, int x, int y, t_data *data);
-int		ft_gradient_color(t_color *clr1, t_color *clr2, double line, int i);
+
+////////// [ image_bonus.c ] //////////
+int		ft_image(t_data *data);
+
+////////// [ main_bonus.c ] //////////
+
+////////// [ parsing_bonus.c ] //////////
+void	ft_import_map(const char *path, t_data *data);
+
+////////// [ projection_bonus.c ] //////////
+void	ft_projection(t_data *data);
+
+////////// [ rgb_bonus.c ] //////////
+void	ft_rgb(t_data *data);
+
+////////// [ tool_bonus.c ] //////////
+void	ft_init_fdf(t_data *data, const char *arg);
+int		ft_close(t_data *data);
+int		ft_exit(t_data *data);
 
 #endif
